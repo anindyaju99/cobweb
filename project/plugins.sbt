@@ -14,4 +14,4 @@ addSbtPlugin("de.johoop" % "findbugs4sbt" % "1.4.0")
  
 addSbtPlugin("com.etsy" % "sbt-checkstyle-plugin" % "0.5.1")
  
-//addSbtPlugin("de.johoop" % "jacoco4sbt" % "2.1.6")
+addSbtPlugin("de.johoop" % "jacoco4sbt" % "2.1.6")

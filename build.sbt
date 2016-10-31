@@ -89,7 +89,7 @@ libraryDependencies ++= Seq(
   "net.debasishg"                   %%"redisclient"                    % "3.0",
   "io.scalac"                       %% "reactive-rabbit"                 % "1.0.3",
   "com.fasterxml.jackson.core"      % "jackson-core"                     % "2.7.3",
-  "junit"                           % "junit"                            % "4.11",
+  "junit"                           % "junit"                            % "4.11"
   //"org.apache.httpcomponents"       %%  "httpclient" % "4.5.2"
 )
 
