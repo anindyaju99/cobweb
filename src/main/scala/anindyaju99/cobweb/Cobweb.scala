@@ -43,11 +43,11 @@ object Cobweb extends App {
 
   def test(nodeManagerRef: ActorRef) = {
     testOneMessge(Own(1), "Own", nodeManagerRef)
-    testOneMessge(PartitionList(true), "Partitions", nodeManagerRef)
+    testOneMessge(PartitionList, "Partitions", nodeManagerRef)
     testOneMessge(Release(1), "Release", nodeManagerRef)
-    testOneMessge(PartitionList(true), "Partitions", nodeManagerRef)
+    testOneMessge(PartitionList, "Partitions", nodeManagerRef)
     testOneMessge(Release(2), "Release", nodeManagerRef)
-    testOneMessge(PartitionList(true), "Partitions", nodeManagerRef)
+    testOneMessge(PartitionList, "Partitions", nodeManagerRef)
   }
 
   def testOneMessge(msg: Any, label: String, nodeManagerRef: ActorRef) = {

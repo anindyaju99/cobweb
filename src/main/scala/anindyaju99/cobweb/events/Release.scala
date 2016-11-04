@@ -5,4 +5,4 @@ package anindyaju99.cobweb.events
  */
 case class Release(partitionNumber: Int)
 case class Own(partitionNumber: Int)
-case class PartitionList(all: Boolean = true)
+case object PartitionList

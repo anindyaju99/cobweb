@@ -27,7 +27,7 @@ class NodeManagerActor(partitionManager: NodeManager) extends CobwebActor {
     case own: Own =>
       partitionManager.own(own.partitionNumber, context)
       sender() ! Ok
-    case list: PartitionList =>
+    case PartitionList =>
       sender() ! partitionManager.list
     case x: Any =>
       log.info("Any msg " + x.toString)
