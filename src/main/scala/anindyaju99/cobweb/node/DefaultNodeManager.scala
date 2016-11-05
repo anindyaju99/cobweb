@@ -4,6 +4,7 @@ import java.util
 
 import akka.actor.{ActorContext, PoisonPill, ActorRef}
 import akka.event.slf4j.Logger
+import akka.routing.Broadcast
 import anindyaju99.cobweb.config.{NodeManagerConfig, CobwebConfig}
 import anindyaju99.cobweb.events.Release
 import anindyaju99.cobweb.factory.ManagerFactory
@@ -24,11 +25,11 @@ class DefaultNodeManager(cobwebConfig: CobwebConfig) extends NodeManager {
   def own(partitionNumber: Int, nodeManager: ActorContext) = {
     log.info("own msg " + partitionNumber)
     if (partitions(partitionNumber) == null) {
-      partitions.synchronized {
+      this.synchronized {
         if (partitions(partitionNumber) == null) {
           log.info("own " + partitionNumber)
           partitions(partitionNumber) =
-            ManagerFactory().createPartitionManagerRef(cobwebConfig, partitionNumber, nodeManager)
+            ManagerFactory().createPartitionManagerRef(partitionNumber, nodeManager)
           currentPartitions = currentPartitions + partitionNumber
         }
       }
@@ -37,10 +38,10 @@ class DefaultNodeManager(cobwebConfig: CobwebConfig) extends NodeManager {
   def release(partitionNumber: Int) = {
     log.info("release msg " + partitionNumber)
     if (partitions(partitionNumber) != null) {
-      partitions.synchronized {
+      this.synchronized {
         if (partitions(partitionNumber) != null) {
           log.info("release " + partitionNumber)
-          partitions(partitionNumber) ! Release
+          partitions(partitionNumber) ! Broadcast(Release(partitionNumber))
           partitions(partitionNumber) = null
           currentPartitions = currentPartitions - partitionNumber
         }

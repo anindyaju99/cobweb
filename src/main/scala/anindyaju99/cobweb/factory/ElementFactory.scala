@@ -1,17 +1,17 @@
 package anindyaju99.cobweb.factory
 
 import akka.actor.{ActorContext, ActorRef}
-import anindyaju99.cobweb.graph.{Edge, Vertex}
+import anindyaju99.cobweb.graph.GraphElementProcessor
 
 /**
  * Created by anindya.chakraborty on 01/11/16.
  */
 trait ElementFactory {
-  def createVertex(id: Long): Vertex
-  def createEdge(id: Long): Edge
+  def createVertex(): GraphElementProcessor
+  def createEdge(): GraphElementProcessor
 
-  def createVertexRef(id: Long, partitionManager: ActorContext): ActorRef
-  def createEdgeRef(id: Long, partitionManager: ActorContext): ActorRef
+  def createVertexRef(id: Long, context: ActorContext): ActorRef
+  def createEdgeRef(id: Long, context: ActorContext): ActorRef
 }
 
 object ElementFactory {
@@ -21,5 +21,5 @@ object ElementFactory {
     elementFactoryInst = factory
   }
 
-  def elementFactory = elementFactoryInst
+  def apply() = elementFactoryInst
 }

@@ -10,6 +10,7 @@ import scala.util.Try
 case class CobwebConfig(config: Config) {
   def debug = Try(config.getBoolean("debug")).getOrElse(false)
   def totalPartitionCount = Try(config.getInt("totalPartitionCount")).getOrElse(2000)
+  def managerFactory = config.getString("managerFactory")
   def partitionManagerConfig = PartitionManagerConfig(this, config.getConfig("partitionManager"))
   def nodeManagerConfig = NodeManagerConfig(this, config.getConfig("nodeManager"))
 }

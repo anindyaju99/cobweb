@@ -6,6 +6,7 @@ import akka.actor.{ActorRef, ActorSystem}
 import akka.pattern._
 import akka.event.slf4j.Logger
 import akka.util.Timeout
+import anindyaju99.cobweb.common.ClassCreator
 import anindyaju99.cobweb.config.CobwebConfig
 import anindyaju99.cobweb.events.{PartitionList, Release, Own}
 import anindyaju99.cobweb.factory.{ActorFactory, DefaultManagerFactory, ManagerFactory}
@@ -32,8 +33,9 @@ object Cobweb extends App {
     val actorFactory = new ActorFactory()
     ActorFactory.register(actorFactory)
 
-    ManagerFactory.registerManagerFactory(new DefaultManagerFactory)
-    val nodeManagerRef = ManagerFactory().createNodeManagerRef(cobwebConfig)
+    val managerFactory = ClassCreator[ManagerFactory](cobwebConfig.managerFactory, cobwebConfig)
+    ManagerFactory.registerManagerFactory(managerFactory)
+    val nodeManagerRef = ManagerFactory().createNodeManagerRef
 
     if (cobwebConfig.debug) {
       test(nodeManagerRef)
@@ -45,6 +47,13 @@ object Cobweb extends App {
     testOneMessge(Own(1), "Own", nodeManagerRef)
     testOneMessge(PartitionList, "Partitions", nodeManagerRef)
     testOneMessge(Release(1), "Release", nodeManagerRef)
+    testOneMessge(PartitionList, "Partitions", nodeManagerRef)
+    testOneMessge(Release(2), "Release", nodeManagerRef)
+    testOneMessge(PartitionList, "Partitions", nodeManagerRef)
+    Thread.sleep(10000) // parition 1 is still not cleared off
+    testOneMessge(Own(1), "Own", nodeManagerRef)
+    testOneMessge(PartitionList, "Partitions", nodeManagerRef)
+    testOneMessge(Own(2), "Own", nodeManagerRef)
     testOneMessge(PartitionList, "Partitions", nodeManagerRef)
     testOneMessge(Release(2), "Release", nodeManagerRef)
     testOneMessge(PartitionList, "Partitions", nodeManagerRef)

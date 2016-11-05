@@ -10,10 +10,10 @@ import anindyaju99.cobweb.partition.PartitionManager
  */
 
 trait ManagerFactory {
-  def createPartitionManager(cobwebConfig: CobwebConfig, partitionNumber: Int): PartitionManager
-  def createPartitionManagerRef(cobwebConfig: CobwebConfig, partitionNumber: Int, nodeManager: ActorContext): ActorRef
-  def createNodeManager(cobwebConfig: CobwebConfig): NodeManager
-  def createNodeManagerRef(cobwebConfig: CobwebConfig): ActorRef
+  protected def createPartitionManager(partitionNumber: Int): PartitionManager
+  def createPartitionManagerRef(partitionNumber: Int, nodeManager: ActorContext): ActorRef
+  protected def createNodeManager: NodeManager
+  def createNodeManagerRef: ActorRef
 }
 
 object ManagerFactory {

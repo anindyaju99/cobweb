@@ -6,3 +6,5 @@ package anindyaju99.cobweb.events
 case class Release(partitionNumber: Int)
 case class Own(partitionNumber: Int)
 case object PartitionList
+
+case class GraphElementEvent(id: Long, from: Long, to: Long, msg: Any)
