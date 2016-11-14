@@ -57,6 +57,8 @@ object Cobweb extends App {
     testOneMessge(PartitionList, "Partitions", nodeManagerRef)
     testOneMessge(Release(2), "Release", nodeManagerRef)
     testOneMessge(PartitionList, "Partitions", nodeManagerRef)
+    testOneMessge(Own(2), "Own", nodeManagerRef)
+    testOneMessge(PartitionList, "Partitions", nodeManagerRef)
   }
 
   def testOneMessge(msg: Any, label: String, nodeManagerRef: ActorRef) = {

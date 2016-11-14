@@ -1,8 +1,9 @@
-package anindyaju99.cobweb.graph
+package anindyaju99.cobweb.graph.impl
 
 import akka.actor.{ActorContext, ActorRef}
 import anindyaju99.cobweb.config.CobwebConfig
 import anindyaju99.cobweb.factory.ElementFactory
+import anindyaju99.cobweb.graph.GraphElementProcessor
 
 /**
  * Created by anindya.chakraborty on 01/11/16.
